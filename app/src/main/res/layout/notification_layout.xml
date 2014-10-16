@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:internal="http://schemas.android.com/apk/prv/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="64dp" >
+<LinearLayout android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="horizontal"
+             internal:layout_minHeight="64dp"
+             internal:layout_maxHeight="64dp" >
+    <ImageView android:id="@+id/icon"
+               android:layout_width="@android:dimen/notification_large_icon_width"
+               android:layout_height="@android:dimen/notification_large_icon_height"
+               android:background="@drawable/notification_template_icon_bg"
+               android:src="@drawable/icon_bar"
+               android:scaleType="center" />
+    <ImageView android:id="@+id/toggleButton"
+               android:layout_width="@android:dimen/notification_large_icon_width"
+               android:layout_height="@android:dimen/notification_large_icon_height"
+               android:background="@drawable/notification_button_bg"
+               android:src="@drawable/play_bar"
+               android:scaleType="center" />
+    <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical"
+            android:minHeight="@android:dimen/notification_large_icon_height"
+            android:minWidth="0dp"
+            android:orientation="vertical"
+            android:paddingEnd="8dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:gravity="top" >
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="6dp"
+                android:layout_marginStart="8dp"
+                android:orientation="horizontal" >
+            <TextView android:id="@+id/trackName"
+                      android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent.Title"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:singleLine="true"
+                      android:ellipsize="marquee"
+                      android:fadingEdge="horizontal"
+                      android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginStart="8dp" >
+            <TextView android:id="@+id/text"
+                      android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent"
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:layout_gravity="center"
+                      android:text="@string/radio_kpi"
+                      android:singleLine="true"
+                      android:ellipsize="marquee"
+                      android:fadingEdge="horizontal" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/closeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical"
+            android:minHeight="@android:dimen/notification_large_icon_height"
+            android:orientation="horizontal"
+            android:background="@drawable/notification_button_bg"
+            android:gravity="center_vertical|right" >
+        <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:src="@drawable/close_bar"
+                   android:scaleType="center" />
+    </LinearLayout>
+</LinearLayout>
+</FrameLayout>

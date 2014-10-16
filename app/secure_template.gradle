@@ -1,0 +1,14 @@
+android {
+    defaultConfig {
+        buildConfigField "String", "FLURRY_APP_KEY", "\"YOUR_KEY_HERE\""
+        buildConfigField "String", "ACRA_FORM_URI", "\"YOUR_FORM_URI_HERE\""
+        buildConfigField "String", "ACRA_LOGIN", "\"YOUR_LOGIN_HERE\""
+        buildConfigField "String", "ACRA_PASSWORD", "\"YOUR_PASSWORD_HERE\""
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "FLURRY_APP_KEY", "\"YOUR_DEBUG_KEY_HERE\""
+        }
+    }
+}

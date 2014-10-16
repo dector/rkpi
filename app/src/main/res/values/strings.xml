@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Радіо КПІ</string>
+    <string name="application_name">Радіо КПІ</string>
+    <string name="main_activity">Радіо КПІ</string>
+    <string name="settings_activity">Налаштування</string>
+    <string name="command_activity">Команда</string>
+    <string name="report">Звітувати</string>
+    <string name="radio_kpi">Радіо КПІ</string>
+
+    <string name="select_stream">Оберіть потік</string>
+    <string name="select_stream_msg">Будь ласка, оберіть потік для програвання</string>
+    <string name="hq_stream">HQ потік (128 kbps)</string>
+    <string name="lowq_stream">Low-Q потік (64 kbps)</string>
+
+    <string name="play">Грати</string>
+    <string name="pause">Пауза</string>
+    <string name="play_pause">Грати/Пауза</string>
+    <string name="close">Вийти</string>
+
+    <string name="loading">Завантаження ...</string>
+    <!--<string name="playing">Playing</string>-->
+    <string name="stopped">Зупинений</string>
+    <string name="any_error">Сталася помилка</string>
+    <string name="connection_error">Помилка з\'єднання з Інтернетом</string>
+    <string name="audio_focus_busy">Інша програма програє аудіо. Для ігнорування встановіть відповідну опцію в налаштуваннях</string>
+    <string name="track_title">%1$s — %2$s</string>
+    <string name="error">Невідома помилка</string>
+    <string name="empty_string"></string>
+
+    <string name="lang_code">uk</string>
+
+    <!-- Preferences -->
+    <string name="preferences_stream_title">Потік для програвання</string>
+    <string name="preferences_foreground_title">Грати у фоні</string>
+    <string name="preferences_ignore_audio_focus">Ігнорувати програвання інших програм</string>
+
+    <!-- About -->
+    <string name="about_app_title1">Офіційний додаток</string>
+    <string name="about_app_title2"><b>Радіо КПІ</b></string>
+    <string name="about_app_title3"><u>r.kpi.ua</u></string>
+    <string name="about_design_title">Дизайн:</string>
+    <string name="about_design_name">Belka&amp;Parovoz</string>
+    <string name="about_design_url"><u>vk.com/belkaiparovoz</u></string>
+    <string name="about_programming_title">Розробка:</string>
+    <string name="about_programming_name">Денис Мосіюк</string>
+    <string name="about_programming_url"><u>dector.github.io</u></string>
+</resources>

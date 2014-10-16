@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
+    <drawable name="notification_button_bg_clicked">#ffbcc2c2</drawable>
+
+    <color name="about_text">#ffffffff</color>
+</resources>

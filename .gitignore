@@ -1,0 +1,32 @@
+#Android generated
+bin
+gen
+
+#Eclipse
+.settings
+
+#IntelliJ IDEA
+.idea
+*.iml
+*.ipr
+*.iws
+out
+
+#Maven
+*/target
+target
+release.properties
+pom.xml.*
+gen-external-apklibs
+/classes
+
+#Ant
+local.properties
+proguard-project.txt
+
+#OSX
+.DS_Store
+
+#Gradle
+.gradle
+build/
