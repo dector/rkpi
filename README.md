@@ -1,5 +1,7 @@
 __Radio KPI Android player__
 
+[![Travis CI](https://travis-ci.org/dector/rkpi.svg?branch=master)](https://travis-ci.org/dector/rkpi)
+
 Code licenced under [MIT Licence](opensource.org/licenses/MIT).
 
 All art belongs to [Belka & Parovoz](vk.com/belkaiparovoz). Please contact creators for additional information.
