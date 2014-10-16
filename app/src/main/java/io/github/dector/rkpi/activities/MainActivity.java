@@ -60,6 +60,8 @@ public class MainActivity extends RkpiActivity implements RequestObserver {
     private static ServiceConnection sConnection;
     private ApplicationService mService;
 
+    private boolean mServiceBound;
+
 	/**
 	 * Create activity and init application components and resources
 	 *
@@ -126,11 +128,13 @@ public class MainActivity extends RkpiActivity implements RequestObserver {
 			@Override
 			public void onServiceConnected(ComponentName name, IBinder service) {
 				mService = ((ApplicationService.Binder) service).getService();
+                mServiceBound = true;
 				mService.init(MainActivity.this, mPagerAdapter);
 			}
 
 			@Override
 			public void onServiceDisconnected(ComponentName name) {
+                mServiceBound = false;
 			}
 		};
 		startService(new Intent(MainActivity.this, ApplicationService.class));
@@ -245,9 +249,11 @@ public class MainActivity extends RkpiActivity implements RequestObserver {
 
 		Logger.close();
 
-        unbindService(sConnection);
+        if (mServiceBound) {
+            unbindService(sConnection);
+        }
 
-        if (force || (mService != null && ! mService.isStoppable())) {
+        if (force || (mService != null && mService.isStoppable())) {
             mStopService = true;
         }
 

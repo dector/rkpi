@@ -38,11 +38,9 @@
     <!-- About -->
     <string name="about_app_title1">Офіційний додаток</string>
     <string name="about_app_title2"><b>Радіо КПІ</b></string>
-    <string name="about_app_title3"><u>r.kpi.ua</u></string>
+    <string name="about_app_title3"><![CDATA[<u>r.kpi.ua</u>]]></string>
     <string name="about_design_title">Дизайн:</string>
-    <string name="about_design_name">Belka&amp;Parovoz</string>
-    <string name="about_design_url"><u>vk.com/belkaiparovoz</u></string>
+    <string name="about_design_name"><![CDATA[<u>Belka&amp;Parovoz</u>]]></string>
     <string name="about_programming_title">Розробка:</string>
-    <string name="about_programming_name">Денис Мосіюк</string>
-    <string name="about_programming_url"><u>dector.github.io</u></string>
+    <string name="about_programming_name"><![CDATA[<u>Денис Мосіюк</u>]]></string>
 </resources>

@@ -88,6 +88,7 @@ public class PlayerManager implements RequestObserver, PlayerCallback {
 	private OuterEventsListener mOuterEventsListener;
 
 	private boolean mRestartPlay;
+    private boolean mPlaying;
 
 	public PlayerManager(Context context, StateManager stateManager) {
 		mContext = context;
@@ -106,7 +107,7 @@ public class PlayerManager implements RequestObserver, PlayerCallback {
 	 * @return true if is playing now
 	 */
 	public boolean isPlaying() {
-		return mStateManager.isPlaying();
+        return mPlaying || mStateManager.isPlaying();
 	}
 
 	// FOR OUTER USE ONLY
@@ -145,6 +146,7 @@ public class PlayerManager implements RequestObserver, PlayerCallback {
 	 */
 	@Override
 	public void playerStarted() {
+        mPlaying = true;
 		mStateManager.setState(PlayerState.PLAYING);
 	}
 
@@ -165,6 +167,8 @@ public class PlayerManager implements RequestObserver, PlayerCallback {
 	 */
 	@Override
 	public void playerStopped(int i) {
+        mPlaying = false;
+
 		if (mStateManager.getState() == PlayerState.PLAYING) {
 			internalStop();
 		}
@@ -184,6 +188,8 @@ public class PlayerManager implements RequestObserver, PlayerCallback {
 	 */
 	@Override
 	public void playerException(Throwable throwable) {
+        mPlaying = false;
+
 		if (throwable instanceof ConnectException) {
 			error(Error.CONNECTION_ERROR);
 		} else {

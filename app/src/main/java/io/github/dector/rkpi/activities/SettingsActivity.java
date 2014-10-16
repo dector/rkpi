@@ -88,12 +88,12 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 		screen.addPreference(streamPreference);
 
 		// Ignore audio focus
-		CheckBoxPreference ignoreAudioFocusPreference = new CheckBoxPreference(this);
+		/*CheckBoxPreference ignoreAudioFocusPreference = new CheckBoxPreference(this);
 		ignoreAudioFocusPreference.setTitle(R.string.preferences_ignore_audio_focus);
 		ignoreAudioFocusPreference.setChecked(PrefManager.isIgnoreAudioFocus());
 		ignoreAudioFocusPreference.setKey(PreferenceKey.IGNORE_AUDIO_FOCUS.name());
 		ignoreAudioFocusPreference.setOnPreferenceChangeListener(this);
-		screen.addPreference(ignoreAudioFocusPreference);
+		screen.addPreference(ignoreAudioFocusPreference);*/
 
 		/*boolean foregroundEnabled = PrefManager.isForegroundEnabled();
 

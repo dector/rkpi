@@ -4,4 +4,6 @@
     <drawable name="notification_button_bg_clicked">#ffbcc2c2</drawable>
 
     <color name="about_text">#ffffffff</color>
+    <color name="about_uri_normal">#ffd5960b</color>
+    <color name="about_uri_pressed">#ffffc500</color>
 </resources>

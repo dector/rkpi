@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -56,10 +57,8 @@ public final class AboutLayout extends AbstractScalableLayout {
 		APP_TITLE3(R.string.about_app_title3),
 		DESIGN_TITLE(R.string.about_design_title),
 		DESIGN_NAME(R.string.about_design_name),
-		DESIGN_URL(R.string.about_design_url),
 		PROGRAMMING_TITLE(R.string.about_programming_title),
-		PROGRAMMING_NAME(R.string.about_programming_name),
-		PROGRAMMING_URL(R.string.about_programming_url);
+		PROGRAMMING_NAME(R.string.about_programming_name);
 
 		/** Label resource string id */
 		public final int textId;
@@ -118,16 +117,14 @@ public final class AboutLayout extends AbstractScalableLayout {
 		addView(mSettingsButton, new LayoutParams(0, 0, 0, 0));
 
 		addText(context, Label.APP_TITLE1, null, false);
-		addText(context, Label.APP_TITLE2, null, false);
-		addText(context, Label.APP_TITLE3, "r.kpi.ua", false);
+        addText(context, Label.APP_TITLE2, null, true);
+        addText(context, Label.APP_TITLE3, "r.kpi.ua", true);
 
 		addText(context, Label.DESIGN_TITLE, null, false);
-		addText(context, Label.DESIGN_NAME, null, true);
-		addText(context, Label.DESIGN_URL, "vavs.tv", false);
+		addText(context, Label.DESIGN_NAME, "vavs.tv", true);
 
 		addText(context, Label.PROGRAMMING_TITLE, null, false);
-		addText(context, Label.PROGRAMMING_NAME, null, true);
-		addText(context, Label.PROGRAMMING_URL, "dector.github.io", false);
+		addText(context, Label.PROGRAMMING_NAME, "dector.github.io", true);
 
 		addSocialButton(context, Social.VKONTAKTE);
 		addSocialButton(context, Social.FACEBOOK);
@@ -150,7 +147,8 @@ public final class AboutLayout extends AbstractScalableLayout {
 
 		TextView view = new TextView(context);
 		view.setTag(label);
-		view.setText(label.textId);
+        String text = context.getResources().getString(label.textId);
+        view.setText(Html.fromHtml(text));
 		view.setSingleLine(true);
 		view.setTypeface((bold) ? resManager.getBoldTypeface() : resManager.getNormalTypeface());
 		view.setTextColor((url == null) ? res.getColor(R.color.about_text) : res.getColor(R.color.about_url));
@@ -260,10 +258,8 @@ public final class AboutLayout extends AbstractScalableLayout {
 				mTextViewLayoutParams.put(Label.APP_TITLE3, new LayoutParams(48, 116, 235, 25).textSize(21));
 				mTextViewLayoutParams.put(Label.DESIGN_TITLE, new LayoutParams(48, 358, 235, 25).textSize(21));
 				mTextViewLayoutParams.put(Label.DESIGN_NAME, new LayoutParams(48, 392, 235, 25).textSize(21));
-				mTextViewLayoutParams.put(Label.DESIGN_URL, new LayoutParams(48, 429, 235, 25).textSize(21));
 				mTextViewLayoutParams.put(Label.PROGRAMMING_TITLE, new LayoutParams(48, 497, 235, 25).textSize(21));
 				mTextViewLayoutParams.put(Label.PROGRAMMING_NAME, new LayoutParams(48, 531, 235, 25).textSize(21));
-				mTextViewLayoutParams.put(Label.PROGRAMMING_URL, new LayoutParams(48, 565, 235, 25).textSize(21));
 
 				mSocialButtonsLayoutParams.clear();
 				mSocialButtonsLayoutParams.put(Social.VKONTAKTE, new LayoutParams(48, 166, 62, 62).scaleProportional());
@@ -277,10 +273,8 @@ public final class AboutLayout extends AbstractScalableLayout {
 				mTextViewLayoutParams.put(Label.APP_TITLE3, new LayoutParams(107, 326, 384, 35).textSize(28));
 				mTextViewLayoutParams.put(Label.DESIGN_TITLE, new LayoutParams(107, 677, 384, 35).textSize(28));
 				mTextViewLayoutParams.put(Label.DESIGN_NAME, new LayoutParams(107, 717, 384, 35).textSize(28));
-				mTextViewLayoutParams.put(Label.DESIGN_URL, new LayoutParams(107, 759, 384, 35).textSize(28));
 				mTextViewLayoutParams.put(Label.PROGRAMMING_TITLE, new LayoutParams(107, 833, 384, 35).textSize(28));
 				mTextViewLayoutParams.put(Label.PROGRAMMING_NAME, new LayoutParams(107, 873, 384, 35).textSize(28));
-				mTextViewLayoutParams.put(Label.PROGRAMMING_URL, new LayoutParams(107, 912, 384, 35).textSize(28));
 
 				mSocialButtonsLayoutParams.clear();
 				mSocialButtonsLayoutParams.put(Social.VKONTAKTE, new LayoutParams(108, 411, 86, 86).scaleProportional());
@@ -294,10 +288,8 @@ public final class AboutLayout extends AbstractScalableLayout {
                 mTextViewLayoutParams.put(Label.APP_TITLE3, new LayoutParams(58, 154, 334, 35).textSize(28));
                 mTextViewLayoutParams.put(Label.DESIGN_TITLE, new LayoutParams(58, 384, 334, 35).textSize(28));
                 mTextViewLayoutParams.put(Label.DESIGN_NAME, new LayoutParams(58, 424, 334, 35).textSize(28));
-                mTextViewLayoutParams.put(Label.DESIGN_URL, new LayoutParams(58, 464, 334, 35).textSize(28));
                 mTextViewLayoutParams.put(Label.PROGRAMMING_TITLE, new LayoutParams(58, 524, 334, 35).textSize(28));
                 mTextViewLayoutParams.put(Label.PROGRAMMING_NAME, new LayoutParams(58, 564, 334, 35).textSize(28));
-                mTextViewLayoutParams.put(Label.PROGRAMMING_URL, new LayoutParams(58, 604, 334, 35).textSize(28));
 
 				mSocialButtonsLayoutParams.clear();
 				mSocialButtonsLayoutParams.put(Social.VKONTAKTE, new LayoutParams(58, 224, 62, 62).scaleProportional());
