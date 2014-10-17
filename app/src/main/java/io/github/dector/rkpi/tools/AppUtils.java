@@ -23,6 +23,8 @@
  */
 package io.github.dector.rkpi.tools;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
@@ -30,6 +32,8 @@ import android.content.pm.PackageManager;
  * @author dector
  */
 public class AppUtils {
+
+    private static final String CLIPBOARD_LABEL = "Radio KPI Track Name";
 
     private AppUtils() {}
 
@@ -40,5 +44,10 @@ public class AppUtils {
             Logger.log(e);
             return "n/a";
         }
+    }
+
+    public static void addToClipboard(Context ctx, String text) {
+        ClipboardManager clipboardManager = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
+        clipboardManager.setPrimaryClip(ClipData.newPlainText(CLIPBOARD_LABEL, text));
     }
 }

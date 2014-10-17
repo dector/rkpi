@@ -26,6 +26,7 @@
     <string name="audio_focus_busy">Інша програма програє аудіо. Для ігнорування встановіть відповідну опцію в налаштуваннях</string>
     <string name="track_title">%1$s — %2$s</string>
     <string name="error">Невідома помилка</string>
+    <string name="track_name_copied">Назву пісні скопійовано у буфер обміну</string>
     <string name="empty_string"></string>
 
     <string name="lang_code">uk</string>

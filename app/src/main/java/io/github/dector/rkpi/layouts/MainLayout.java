@@ -169,6 +169,10 @@ public final class MainLayout extends AbstractScalableLayout implements PlayerSt
 		return mInfoButton;
 	}
 
+    public TextView getTrackNameView() {
+        return mTrackNameView;
+    }
+
 	/**
 	 * Configure layout with selected orientation
 	 *
