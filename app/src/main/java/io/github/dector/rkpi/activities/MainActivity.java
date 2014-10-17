@@ -29,6 +29,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.text.TextUtils;
 import android.view.View;
 
 import io.github.dector.rkpi.R;
@@ -37,8 +38,10 @@ import io.github.dector.rkpi.components.notifications.Request;
 import io.github.dector.rkpi.components.notifications.RequestObserver;
 import io.github.dector.rkpi.components.player.PlayerManager;
 import io.github.dector.rkpi.services.ApplicationService;
+import io.github.dector.rkpi.tools.AppUtils;
 import io.github.dector.rkpi.tools.Logger;
 import io.github.dector.rkpi.layouts.MainLayout;
+import io.github.dector.rkpi.tools.Toaster;
 import io.github.dector.rkpi.views.AppViewPager;
 
 import static io.github.dector.rkpi.tools.FlurryClient.Event;
@@ -99,6 +102,18 @@ public class MainActivity extends RkpiActivity implements RequestObserver {
 			setOrientation(Configuration.ORIENTATION_PORTRAIT);
 		}
 
+        mPagerAdapter.getTrackNameView().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String text = mPagerAdapter.getTrackNameView().getText().toString();
+                if (!TextUtils.isEmpty(text)) {
+                    AppUtils.addToClipboard(MainActivity.this, text);
+                    Toaster.getInstance().send(getString(R.string.track_name_copied));
+                }
+
+                return true;
+            }
+        });
 		mPagerAdapter.getPlayButton().setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -31,6 +31,7 @@ import org.acra.annotation.ReportsCrashes;
 import io.github.dector.rkpi.common.PrefManager;
 import io.github.dector.rkpi.common.ResManager;
 import io.github.dector.rkpi.tools.DeviceTools;
+import io.github.dector.rkpi.tools.Toaster;
 
 import static io.github.dector.rkpi.tools.FlurryClient.Event;
 
@@ -58,6 +59,7 @@ public class RkpiApplication extends Application {
 
 		PrefManager.init(this);
 		ResManager.init(this);
+        Toaster.init(this);
 
 		mIsTablet = DeviceTools.isTablet(this);
 

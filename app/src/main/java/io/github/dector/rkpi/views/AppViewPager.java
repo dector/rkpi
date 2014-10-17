@@ -41,6 +41,7 @@ import android.view.WindowManager;
 import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.Scroller;
+import android.widget.TextView;
 
 import io.github.dector.rkpi.R;
 import io.github.dector.rkpi.components.player.PlayerStateObserver;
@@ -322,6 +323,10 @@ public class AppViewPager extends ViewPager {
 		public Button getSettingsButton() {
 			return mAboutLayout.getSettingsButton();
 		}
+
+        public TextView getTrackNameView() {
+            return mMainLayout.getTrackNameView();
+        }
 
 		/**
 		 * Update layout when player state changed
