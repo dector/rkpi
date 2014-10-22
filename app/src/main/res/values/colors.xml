@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
     <drawable name="notification_button_bg_clicked">#ffbcc2c2</drawable>
 
+    <!-- About -->
     <color name="about_text">#ffffffff</color>
     <color name="about_uri_normal">#ffd5960b</color>
     <color name="about_uri_pressed">#ffffc500</color>
+
+    <!-- Dialogs -->
+    <color name="dialog_title_text">#ffc500</color>
+    <color name="dialog_title_separator">#ffc500</color>
+    <color name="dialog_button_normal">#2a2a2a</color>
+    <color name="dialog_button_pressed">#d5960b</color>
+    <color name="dialog_button_focused">#ffc500</color>
+    <color name="dialog_background">#2a2a2a</color>
+
 </resources>

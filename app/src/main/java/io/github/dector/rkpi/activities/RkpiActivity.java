@@ -23,7 +23,7 @@
  */
 package io.github.dector.rkpi.activities;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 
 import io.github.dector.rkpi.RkpiApplication;
 import io.github.dector.rkpi.tools.FlurryClient;
@@ -31,7 +31,7 @@ import io.github.dector.rkpi.tools.FlurryClient;
 /**
  * @author dector
  */
-public abstract class RkpiActivity extends Activity {
+public abstract class RkpiActivity extends FragmentActivity {
 
 	public RkpiApplication getRkpiApplication() {
 		return (RkpiApplication) getApplication();

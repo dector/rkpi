@@ -23,7 +23,6 @@
  */
 package io.github.dector.rkpi.activities;
 
-import android.app.AlertDialog;
 import android.content.*;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -32,6 +31,8 @@ import android.os.IBinder;
 import android.text.TextUtils;
 import android.view.View;
 
+import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
+import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 import io.github.dector.rkpi.R;
 import io.github.dector.rkpi.common.PrefManager;
 import io.github.dector.rkpi.components.notifications.Request;
@@ -51,9 +52,11 @@ import static io.github.dector.rkpi.tools.FlurryClient.Event;
  *
  * @author dector
  */
-public class MainActivity extends RkpiActivity implements RequestObserver {
+public class MainActivity extends RkpiActivity implements RequestObserver, ISimpleDialogListener {
 
 	private static final String KEY_STATE_PAGE_OPENED = "KEY_STATE_PAGE_OPENED";
+
+    private enum RequestCode { STREAM_QUALITY }
 
 	/** Root layout container */
 	private AppViewPager mViewPager;
@@ -162,43 +165,50 @@ public class MainActivity extends RkpiActivity implements RequestObserver {
 			PrefManager.setForegroundEnabled(true);
 			PrefManager.setIgnoreAudioFocus(false);
 
-			DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					switch (which) {
-						case DialogInterface.BUTTON_POSITIVE:
-							Event.STREAM_SELECTED.builder()
-									.param(Event.KEY_WHERE, Event.VALUE_WHERE_INIT)
-									.param(Event.KEY_WHAT, Event.VALUE_WHAT_HQ).log();
-							PrefManager.setStreamQuality(PlayerManager.StreamQuality.HQ);
-							break;
-						case DialogInterface.BUTTON_NEGATIVE:
-							Event.STREAM_SELECTED.builder()
-									.param(Event.KEY_WHERE, Event.VALUE_WHERE_INIT)
-									.param(Event.KEY_WHAT, Event.VALUE_WHAT_LQ).log();
-							PrefManager.setStreamQuality(PlayerManager.StreamQuality.LOW);
-							break;
-						default:
-							break;
-					}
-
-					Event.INIT_APP.builder().log();
-					PrefManager.setAppInitialized(true);
-				}
-			};
-
-			new AlertDialog.Builder(this)
-					.setTitle(R.string.select_stream)
-					.setMessage(R.string.select_stream_msg)
-					.setIcon(android.R.drawable.ic_dialog_info)
-					.setPositiveButton(R.string.hq_stream, listener)
-					.setNegativeButton(R.string.lowq_stream, listener)
-					.create()
-					.show();
+            SimpleDialogFragment.createBuilder(this, getSupportFragmentManager())
+                    .setTitle(R.string.select_stream)
+                    .setMessage(R.string.select_stream_msg)
+                    .setRequestCode(RequestCode.STREAM_QUALITY.ordinal())
+                    .setPositiveButtonText(R.string.hq_stream)
+                    .setNegativeButtonText(R.string.lowq_stream)
+                    .show();
 		}
 	}
 
-	@Override
+    @Override
+    public void onPositiveButtonClicked(int requestCode) {
+        if (requestCode == RequestCode.STREAM_QUALITY.ordinal()) {
+            Event.STREAM_SELECTED.builder()
+                    .param(Event.KEY_WHERE, Event.VALUE_WHERE_INIT)
+                    .param(Event.KEY_WHAT, Event.VALUE_WHAT_HQ).log();
+            PrefManager.setStreamQuality(PlayerManager.StreamQuality.HQ);
+        }
+
+        trackAppInit();
+    }
+
+    @Override
+    public void onNegativeButtonClicked(int requestCode) {
+        if (requestCode == RequestCode.STREAM_QUALITY.ordinal()) {
+            Event.STREAM_SELECTED.builder()
+                    .param(Event.KEY_WHERE, Event.VALUE_WHERE_INIT)
+                    .param(Event.KEY_WHAT, Event.VALUE_WHAT_LQ).log();
+            PrefManager.setStreamQuality(PlayerManager.StreamQuality.LOW);
+        }
+
+        trackAppInit();
+    }
+
+    @Override
+    public void onNeutralButtonClicked(int requestCode) {
+    }
+
+    private void trackAppInit() {
+        Event.INIT_APP.builder().log();
+        PrefManager.setAppInitialized(true);
+    }
+
+    @Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(KEY_STATE_PAGE_OPENED, mViewPager.getCurrentItem());
