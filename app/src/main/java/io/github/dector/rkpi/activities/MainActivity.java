@@ -181,10 +181,7 @@ public class MainActivity extends RkpiActivity implements RequestObserver, ISimp
     @Override
     public void onPositiveButtonClicked(int requestCode) {
         if (requestCode == RequestCode.STREAM_QUALITY.ordinal()) {
-            Event.STREAM_SELECTED.builder()
-                    .param(Event.KEY_WHERE, Event.VALUE_WHERE_INIT)
-                    .param(Event.KEY_WHAT, Event.VALUE_WHAT_HQ).log();
-            PrefManager.setStreamQuality(PlayerManager.StreamQuality.HQ);
+            streamSelected(PlayerManager.StreamQuality.HQ);
         }
 
         trackAppInit();
@@ -193,10 +190,7 @@ public class MainActivity extends RkpiActivity implements RequestObserver, ISimp
     @Override
     public void onNegativeButtonClicked(int requestCode) {
         if (requestCode == RequestCode.STREAM_QUALITY.ordinal()) {
-            Event.STREAM_SELECTED.builder()
-                    .param(Event.KEY_WHERE, Event.VALUE_WHERE_INIT)
-                    .param(Event.KEY_WHAT, Event.VALUE_WHAT_LQ).log();
-            PrefManager.setStreamQuality(PlayerManager.StreamQuality.LQ);
+            streamSelected(PlayerManager.StreamQuality.LQ);
         }
 
         trackAppInit();
@@ -228,6 +222,17 @@ public class MainActivity extends RkpiActivity implements RequestObserver, ISimp
                 Logger.log(new Throwable("Undefined stream quality: " + streamQuality));
             }
         }
+    }
+
+    private void streamSelected(PlayerManager.StreamQuality streamQuality) {
+        final String what = (streamQuality == PlayerManager.StreamQuality.HQ) ? Event.VALUE_WHAT_HQ
+                : (streamQuality == PlayerManager.StreamQuality.LQ) ? Event.VALUE_WHAT_LQ
+                : "";
+
+        Event.STREAM_SELECTED.builder()
+                .param(Event.KEY_WHERE, Event.VALUE_WHERE_INIT)
+                .param(Event.KEY_WHAT, what).log();
+        PrefManager.setStreamQuality(streamQuality);
     }
 
     private void trackAppInit() {

@@ -22,7 +22,7 @@
         <!-- Activities -->
 
         <activity
-            android:name="io.github.dector.rkpi.activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/main_activity"
             android:launchMode="singleInstance">
 
@@ -35,7 +35,7 @@
         </activity>
 
         <activity
-            android:name="io.github.dector.rkpi.activities.SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:label="@string/settings_activity"
             android:theme="@style/PreferencesTheme" />
 
