@@ -275,7 +275,7 @@ public class PlayerManager implements RequestObserver, PlayerCallback {
 				setStreamQuality(StreamQuality.HQ);
 				break;
 			case SET_LQ_STREAM:
-				setStreamQuality(StreamQuality.LOW);
+				setStreamQuality(StreamQuality.LQ);
 				break;
 			case PLAYER_PAUSE:
 				stop();
@@ -305,10 +305,10 @@ public class PlayerManager implements RequestObserver, PlayerCallback {
 	 * Toggle stream quality
 	 */
 	private void toggleHQ() {
-		if (mStreamQuality == StreamQuality.LOW) {
+		if (mStreamQuality == StreamQuality.LQ) {
 			setStreamQuality(StreamQuality.HQ);
 		} else if (mStreamQuality == StreamQuality.HQ) {
-			setStreamQuality(StreamQuality.LOW);
+			setStreamQuality(StreamQuality.LQ);
 		}
 	}
 
@@ -331,7 +331,7 @@ public class PlayerManager implements RequestObserver, PlayerCallback {
 	 * Stream quality
 	 */
 	public static enum StreamQuality {
-		LOW("http://77.47.130.190:8000/64kbps"),
+		LQ("http://77.47.130.190:8000/64kbps"),
 		HQ("http://77.47.130.190:8000/radiokpi");
 
 		public final String uri;
@@ -341,7 +341,7 @@ public class PlayerManager implements RequestObserver, PlayerCallback {
 		}
 
 		public static StreamQuality getDefault() {
-			return HQ;
+			return LQ;
 		}
 	}
 

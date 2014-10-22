@@ -73,7 +73,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
 		// Stream
 		String[] streamEntries = { res.getString(R.string.lowq_stream), res.getString(R.string.hq_stream) };
-		String[] streamValues = { String.valueOf(PlayerManager.StreamQuality.LOW.ordinal()),
+		String[] streamValues = { String.valueOf(PlayerManager.StreamQuality.LQ.ordinal()),
 				String.valueOf(PlayerManager.StreamQuality.HQ.ordinal()) };
 		PlayerManager.StreamQuality streamQuality = PrefManager.getStreamQuality();
 

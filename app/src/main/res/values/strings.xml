@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Радіо КПІ</string>
     <string name="application_name">Радіо КПІ</string>
     <string name="main_activity">Радіо КПІ</string>
@@ -8,10 +9,12 @@
     <string name="report">Звітувати</string>
     <string name="radio_kpi">Радіо КПІ</string>
 
+    <!-- First run dialog -->
     <string name="select_stream">Оберіть потік</string>
     <string name="select_stream_msg">Будь ласка, оберіть потік для програвання</string>
     <string name="hq_stream">HQ потік (128 kbps)</string>
     <string name="lowq_stream">Low-Q потік (64 kbps)</string>
+    <string name="stream_selected">Встановлено %s. Змінити можна у налаштуваннях</string>
 
     <string name="play">Грати</string>
     <string name="pause">Пауза</string>
@@ -44,4 +47,5 @@
     <string name="about_design_name"><![CDATA[<u>Belka&amp;Parovoz</u>]]></string>
     <string name="about_programming_title">Розробка:</string>
     <string name="about_programming_name"><![CDATA[<u>Денис Мосіюк</u>]]></string>
+
 </resources>

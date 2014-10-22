@@ -31,6 +31,7 @@ import android.os.IBinder;
 import android.text.TextUtils;
 import android.view.View;
 
+import eu.inmite.android.lib.dialogs.ISimpleDialogCancelListener;
 import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 import io.github.dector.rkpi.R;
@@ -52,7 +53,7 @@ import static io.github.dector.rkpi.tools.FlurryClient.Event;
  *
  * @author dector
  */
-public class MainActivity extends RkpiActivity implements RequestObserver, ISimpleDialogListener {
+public class MainActivity extends RkpiActivity implements RequestObserver, ISimpleDialogListener, ISimpleDialogCancelListener {
 
 	private static final String KEY_STATE_PAGE_OPENED = "KEY_STATE_PAGE_OPENED";
 
@@ -172,6 +173,8 @@ public class MainActivity extends RkpiActivity implements RequestObserver, ISimp
                     .setPositiveButtonText(R.string.hq_stream)
                     .setNegativeButtonText(R.string.lowq_stream)
                     .show();
+
+            PrefManager.setAppInitialized(true);
 		}
 	}
 
@@ -193,7 +196,7 @@ public class MainActivity extends RkpiActivity implements RequestObserver, ISimp
             Event.STREAM_SELECTED.builder()
                     .param(Event.KEY_WHERE, Event.VALUE_WHERE_INIT)
                     .param(Event.KEY_WHAT, Event.VALUE_WHAT_LQ).log();
-            PrefManager.setStreamQuality(PlayerManager.StreamQuality.LOW);
+            PrefManager.setStreamQuality(PlayerManager.StreamQuality.LQ);
         }
 
         trackAppInit();
@@ -203,9 +206,32 @@ public class MainActivity extends RkpiActivity implements RequestObserver, ISimp
     public void onNeutralButtonClicked(int requestCode) {
     }
 
+    @Override
+    public void onCancelled(int requestCode) {
+        if (requestCode == RequestCode.STREAM_QUALITY.ordinal()) {
+            final PlayerManager.StreamQuality streamQuality = PlayerManager.StreamQuality.getDefault();
+            PrefManager.setStreamQuality(streamQuality);
+
+            String streamName = null;
+            switch (streamQuality) {
+                case HQ:
+                    streamName = getString(R.string.hq_stream);
+                    break;
+                case LQ:
+                    streamName = getString(R.string.lowq_stream);
+                    break;
+            }
+
+            if (streamName != null) {
+                Toaster.getInstance().send(getString(R.string.stream_selected, streamName));
+            } else {
+                Logger.log(new Throwable("Undefined stream quality: " + streamQuality));
+            }
+        }
+    }
+
     private void trackAppInit() {
         Event.INIT_APP.builder().log();
-        PrefManager.setAppInitialized(true);
     }
 
     @Override
