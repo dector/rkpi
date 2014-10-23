@@ -27,6 +27,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.*;
+
+import io.github.dector.rkpi.BuildConfig;
 import io.github.dector.rkpi.R;
 import io.github.dector.rkpi.common.PrefManager;
 import io.github.dector.rkpi.components.notifications.Request;
@@ -86,6 +88,19 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 		streamPreference.setValue(String.valueOf(streamQuality.ordinal()));
 		updateStreamPreferenceSummary(streamPreference, streamQuality);
 		screen.addPreference(streamPreference);
+
+        if (BuildConfig.DEBUG) {
+            Preference preference = new Preference(this);
+            preference.setTitle(R.string.preferences_developers);
+            preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    startActivity(new Intent(SettingsActivity.this, DevSettingsActivity.class));
+                    return true;
+                }
+            });
+            screen.addPreference(preference);
+        }
 
 		// Ignore audio focus
 		/*CheckBoxPreference ignoreAudioFocusPreference = new CheckBoxPreference(this);

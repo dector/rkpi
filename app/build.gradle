@@ -20,11 +20,19 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 dependencies {
     compile 'com.android.support:support-v4:21.0.3'
     compile 'eu.inmite.android.lib:android-styled-dialogs:1.2.0'
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.3'
+    compile 'com.jayway.jsonpath:json-path:1.1.0'
     compile fileTree(dir: 'libs', include:"*.jar")
 }
 

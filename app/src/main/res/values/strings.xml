@@ -5,6 +5,8 @@
     <string name="application_name">Радіо КПІ</string>
     <string name="main_activity">Радіо КПІ</string>
     <string name="settings_activity">Налаштування</string>
+    <string name="dev_settings_activity">Для розробників</string>
+    <string name="last_tracks_activity">Останні треки</string>
     <string name="command_activity">Команда</string>
     <string name="report">Звітувати</string>
     <string name="radio_kpi">Радіо КПІ</string>
@@ -38,6 +40,10 @@
     <string name="preferences_stream_title">Потік для програвання</string>
     <string name="preferences_foreground_title">Грати у фоні</string>
     <string name="preferences_ignore_audio_focus">Ігнорувати програвання інших програм</string>
+    <string name="preferences_developers">Для розробників</string>
+    <string name="preferences_last_tracks">Що грало у ефірі</string>
+
+    <string name="preference_key_last_tracks">preference_key_last_tracks</string>
 
     <!-- About -->
     <string name="about_app_title1">Офіційний додаток</string>

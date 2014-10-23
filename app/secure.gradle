@@ -4,6 +4,7 @@ android {
         buildConfigField "String", "ACRA_FORM_URI", "\"YOUR_FORM_URI_HERE\""
         buildConfigField "String", "ACRA_LOGIN", "\"YOUR_LOGIN_HERE\""
         buildConfigField "String", "ACRA_PASSWORD", "\"YOUR_PASSWORD_HERE\""
+        buildConfigField "String", "LASTFM_API_KEY", "\"YOUR_API_KEY_HERE\""
     }
 
     buildTypes {
