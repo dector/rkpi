@@ -45,7 +45,7 @@
             android:theme="@style/PreferencesTheme" />
 
         <activity
-            android:name=".activities.LastTracksActivity"
+            android:name=".experimental.last_tracks.LastTracksActivity"
             android:label="@string/last_tracks_activity"
             android:theme="@style/PreferencesTheme" />
 

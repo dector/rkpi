@@ -21,30 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.dector.rkpi.activities;
+package io.github.dector.rkpi.experimental.last_tracks;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.support.v4.app.FragmentActivity;
 
 import io.github.dector.rkpi.R;
-import io.github.dector.rkpi.experimental.last_tracks.LastTracksActivity;
 
 /**
  * @author dector
  */
-public class DevSettingsActivity extends PreferenceActivity {
+public class LastTracksActivity extends FragmentActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences_development);
-        findPreference(getString(R.string.preference_key_last_tracks)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                startActivity(new Intent(DevSettingsActivity.this, LastTracksActivity.class));
-                return true;
-            }
-        });
+        setContentView(R.layout.activity_last_tracks);
+
+        if (savedInstanceState == null) {
+            LastTracksFragment fragment = new LastTracksFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.content, fragment)
+                    .commit();
+        }
     }
 }

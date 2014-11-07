@@ -21,30 +21,56 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.dector.rkpi.activities;
+package io.github.dector.rkpi.experimental.last_tracks;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
 
-import io.github.dector.rkpi.R;
-import io.github.dector.rkpi.experimental.last_tracks.LastTracksActivity;
+import java.util.List;
+
+import io.github.dector.rkpi.lastfm.LastFmAPI;
+import io.github.dector.rkpi.lastfm.Track;
 
 /**
- * @author dector
- */
-public class DevSettingsActivity extends PreferenceActivity {
+* @author dector
+*/
+class LastTracksLoader extends AsyncTaskLoader<List<Track>> {
+
+    private List<Track> data;
+
+    LastTracksLoader(Context context) {
+        super(context);
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences_development);
-        findPreference(getString(R.string.preference_key_last_tracks)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                startActivity(new Intent(DevSettingsActivity.this, LastTracksActivity.class));
-                return true;
-            }
-        });
+    protected void onStartLoading() {
+        if (data == null || takeContentChanged()) {
+            forceLoad();
+        } else {
+            deliverResult(data);
+        }
+    }
+
+    @Override
+    public List<Track> loadInBackground() {
+        return new LastFmAPI().getTracks();
+    }
+
+    @Override
+    protected void onStopLoading() {
+        cancelLoad();
+    }
+
+    @Override
+    public void deliverResult(List<Track> data) {
+        this.data = data;
+        super.deliverResult(data);
+    }
+
+    @Override
+    protected void onReset() {
+        super.onReset();
+        data = null;
+        stopLoading();
     }
 }

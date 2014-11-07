@@ -21,30 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.dector.rkpi.activities;
+package io.github.dector.rkpi.experimental.last_tracks;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.view.View;
 
-import io.github.dector.rkpi.R;
-import io.github.dector.rkpi.experimental.last_tracks.LastTracksActivity;
+import java.util.List;
+
+import io.github.dector.rkpi.lastfm.Track;
 
 /**
  * @author dector
  */
-public class DevSettingsActivity extends PreferenceActivity {
+public class LastTracksFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<Track>> {
+
+    private TracksListAdapter adapter;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences_development);
-        findPreference(getString(R.string.preference_key_last_tracks)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                startActivity(new Intent(DevSettingsActivity.this, LastTracksActivity.class));
-                return true;
-            }
-        });
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        adapter = new TracksListAdapter(getActivity());
+        setListAdapter(adapter);
+        getLoaderManager().initLoader(0, null, this);
     }
+
+    @Override
+    public Loader<List<Track>> onCreateLoader(int i, Bundle bundle) {
+        return new LastTracksLoader(getActivity());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Track>> listLoader, List<Track> tracks) {
+        adapter.setData(tracks);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Track>> listLoader) {
+    }
+
 }

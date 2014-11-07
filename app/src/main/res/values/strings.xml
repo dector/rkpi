@@ -54,4 +54,7 @@
     <string name="about_programming_title">Розробка:</string>
     <string name="about_programming_name"><![CDATA[<u>Денис Мосіюк</u>]]></string>
 
+    <!-- Last tracks -->
+    <string name="last_tracks_loading">Завантажую...</string>
+
 </resources>
