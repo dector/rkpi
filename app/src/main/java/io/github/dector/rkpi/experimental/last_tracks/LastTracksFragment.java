@@ -27,10 +27,17 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
+import io.github.dector.rkpi.R;
 import io.github.dector.rkpi.lastfm.Track;
 
 /**
@@ -40,13 +47,42 @@ public class LastTracksFragment extends ListFragment implements LoaderManager.Lo
 
     private TracksListAdapter adapter;
 
+    private ProgressBar progressBar;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_last_tracks, container, false);
+        progressBar = (ProgressBar) v.findViewById(R.id.progress);
+        return v;
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         adapter = new TracksListAdapter(getActivity());
         setListAdapter(adapter);
+        sync();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.last_tracks, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.ab_menu_update) {
+            sync();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void sync() {
         getLoaderManager().initLoader(0, null, this);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -56,6 +92,7 @@ public class LastTracksFragment extends ListFragment implements LoaderManager.Lo
 
     @Override
     public void onLoadFinished(Loader<List<Track>> listLoader, List<Track> tracks) {
+        progressBar.setVisibility(View.GONE);
         adapter.setData(tracks);
     }
 

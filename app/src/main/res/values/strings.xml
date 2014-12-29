@@ -57,4 +57,7 @@
     <!-- Last tracks -->
     <string name="last_tracks_loading">Завантажую...</string>
 
+    <!-- Menu -->
+    <string name="menu_update">Оновити</string>
+
 </resources>
